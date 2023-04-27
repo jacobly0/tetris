@@ -62,9 +62,9 @@ pub const Spritesheet = struct {
 
         const vertexes = [_][3]c.GLfloat{
             [_]c.GLfloat{ 0.0, 0.0, 0.0 },
-            [_]c.GLfloat{ 0.0, @intToFloat(c.GLfloat, h), 0.0 },
-            [_]c.GLfloat{ @intToFloat(c.GLfloat, w), 0.0, 0.0 },
-            [_]c.GLfloat{ @intToFloat(c.GLfloat, w), @intToFloat(c.GLfloat, h), 0.0 },
+            [_]c.GLfloat{ 0.0, @intToFloat(c.GLfloat, @intCast(i32, h)), 0.0 },
+            [_]c.GLfloat{ @intToFloat(c.GLfloat, @intCast(i32, w)), 0.0, 0.0 },
+            [_]c.GLfloat{ @intToFloat(c.GLfloat, @intCast(i32, w)), @intToFloat(c.GLfloat, @intCast(i32, h)), 0.0 },
         };
 
         c.glBindBuffer(c.GL_ARRAY_BUFFER, s.vertex_buffer);
@@ -82,26 +82,26 @@ pub const Spritesheet = struct {
             const col = i % col_count;
             const row = row_count - upside_down_row - 1;
 
-            const x = @intToFloat(f32, col * w);
-            const y = @intToFloat(f32, row * h);
+            const x = @intToFloat(f32, @intCast(i32, col * w));
+            const y = @intToFloat(f32, @intCast(i32, row * h));
 
             const img_w = @intToFloat(f32, s.img.width);
             const img_h = @intToFloat(f32, s.img.height);
             const tex_coords = [_][2]c.GLfloat{
                 [_]c.GLfloat{
                     x / img_w,
-                    (y + @intToFloat(f32, h)) / img_h,
+                    (y + @intToFloat(f32, @intCast(i32, h))) / img_h,
                 },
                 [_]c.GLfloat{
                     x / img_w,
                     y / img_h,
                 },
                 [_]c.GLfloat{
-                    (x + @intToFloat(f32, w)) / img_w,
-                    (y + @intToFloat(f32, h)) / img_h,
+                    (x + @intToFloat(f32, @intCast(i32, w))) / img_w,
+                    (y + @intToFloat(f32, @intCast(i32, h))) / img_h,
                 },
                 [_]c.GLfloat{
-                    (x + @intToFloat(f32, w)) / img_w,
+                    (x + @intToFloat(f32, @intCast(i32, w))) / img_w,
                     y / img_h,
                 },
             };

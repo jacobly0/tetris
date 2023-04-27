@@ -452,9 +452,9 @@ pub const Tetris = struct {
                         Cell.Empty => continue,
                         Cell.Color => |col| col,
                     };
-                    const center_x = @intToFloat(f32, board_left + x * cell_size) +
+                    const center_x = @intToFloat(f32, @intCast(i32, board_left + x * cell_size)) +
                         @intToFloat(f32, cell_size) / 2.0;
-                    const center_y = @intToFloat(f32, board_top + y * cell_size) +
+                    const center_y = @intToFloat(f32, @intCast(i32, board_top + y * cell_size)) +
                         @intToFloat(f32, cell_size) / 2.0;
                     addExplosion(t, color, center_x, center_y);
                 }
@@ -613,8 +613,8 @@ pub const Tetris = struct {
                     Cell.Empty => continue,
                     Cell.Color => |col| col,
                 };
-                const left = @intToFloat(f32, board_left + x * cell_size);
-                const top = @intToFloat(f32, board_top + y * cell_size);
+                const left = @intToFloat(f32, @intCast(i32, board_left + x * cell_size));
+                const top = @intToFloat(f32, @intCast(i32, board_top + y * cell_size));
                 t.falling_blocks[getNextFallingBlockIndex(t)] = createBlockParticle(t, color, Vec3.init(left, top, 0.0));
             }
         }
